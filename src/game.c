@@ -1617,7 +1617,7 @@ NewLevel(VOID)
             if (DemoModeMenuInit)
                 {
                 DemoModeMenuInit = FALSE;
-                KEY_PRESSED(KEYSC_ESC) = TRUE;
+                ForceMenus = TRUE;
                 }
             }
 
@@ -2191,7 +2191,7 @@ MenuLevel(VOID)
     // go to ordering menu only if shareware
     if (FinishAnim)
         {
-        KEY_PRESSED(KEYSC_ESC) = 1;
+        ForceMenus = TRUE;
         ControlPanelType = ct_ordermenu;
         FinishAnim = 0;
         }
@@ -2251,7 +2251,7 @@ MenuLevel(VOID)
         // force the use of menus at all time
         if (!UsingMenus && !ConPanel)
             {
-            KEY_PRESSED(KEYSC_ESC) = TRUE;
+            ForceMenus = TRUE;
             MNU_CheckForMenusAnyKey();
             }
 
@@ -3893,7 +3893,7 @@ int app_main(int argc, char const * const argv[])
                 }
             }
         else
-        if (FALSE && Bstrncasecmp(arg, "dr", 2) == 0)
+        if (Bstrncasecmp(arg, "dr", 2) == 0)
             {
             //NumSyncBytes = 8;
             DemoRecording = TRUE;
@@ -3908,7 +3908,7 @@ int app_main(int argc, char const * const argv[])
                 }
             }
         else
-        if (FALSE && Bstrncasecmp(arg, "dp", 2) == 0)
+        if (Bstrncasecmp(arg, "dp", 2) == 0)
             {
             DemoPlaying = TRUE;
             DemoRecording = FALSE;
@@ -4561,7 +4561,7 @@ FunctionKeys(PLAYERp pp)
             KEY_PRESSED(KEYSC_F2) = 0;
             if (!TEST(pp->Flags, PF_DEAD))
                 {
-                KEY_PRESSED(KEYSC_ESC) = 1;
+                ForceMenus = TRUE;
                 ControlPanelType = ct_savemenu;
                 }
             }
@@ -4572,7 +4572,7 @@ FunctionKeys(PLAYERp pp)
             KEY_PRESSED(KEYSC_F3) = 0;
             if (!TEST(pp->Flags, PF_DEAD))
                 {
-                KEY_PRESSED(KEYSC_ESC) = 1;
+                ForceMenus = TRUE;
                 ControlPanelType = ct_loadmenu;
                 }
             }
@@ -4584,7 +4584,7 @@ FunctionKeys(PLAYERp pp)
             KEY_PRESSED(KEYSC_F6) = 0;
             if (!TEST(pp->Flags, PF_DEAD))
                 {
-                KEY_PRESSED(KEYSC_ESC) = 1;
+                ForceMenus = TRUE;
                 ControlPanelType = ct_savemenu;
                 QuickSaveMode = TRUE;
                 }
@@ -4604,7 +4604,7 @@ FunctionKeys(PLAYERp pp)
                 else
                     {
                     KB_ClearKeysDown();
-                    KEY_PRESSED(KEYSC_ESC) = 1;
+                    ForceMenus = TRUE;
                     ControlPanelType = ct_quickloadmenu;
                     }
                 }
@@ -4617,7 +4617,7 @@ FunctionKeys(PLAYERp pp)
     if (KEY_PRESSED(KEYSC_F4))
         {
         KEY_PRESSED(KEYSC_F4) = 0;
-        KEY_PRESSED(KEYSC_ESC) = 1;
+        ForceMenus = TRUE;
         ControlPanelType = ct_soundmenu;
         }
 
@@ -4663,7 +4663,7 @@ FunctionKeys(PLAYERp pp)
     if (KEY_PRESSED(KEYSC_F10))
         {
         KEY_PRESSED(KEYSC_F10) = 0;
-        KEY_PRESSED(KEYSC_ESC) = 1;
+        ForceMenus = TRUE;
         ControlPanelType = ct_quitmenu;
         }
 
@@ -4732,7 +4732,7 @@ VOID PauseKey(PLAYERp pp)
                 }
             else
                 {
-                KEY_PRESSED(KEYSC_ESC) = 1;
+                ForceMenus = TRUE;
                 ControlPanelType = ct_quickloadmenu;
                 }
             }
